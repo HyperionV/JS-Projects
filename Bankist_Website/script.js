@@ -39,3 +39,12 @@ const btnScrollTo = document
 
     section1.scrollIntoView({ behavior: 'smooth' });
   });
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const target = e.target.getAttribute('href');
+  if (e.target.classList.contains('section') && target.includes('section')) {
+    document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+  }
+});
