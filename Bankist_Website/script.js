@@ -41,7 +41,6 @@ document.addEventListener('keydown', function (e) {
 
 // smooth scrolling
 const section1 = document.querySelector('#section--1');
-console.log(section1.innerHTML);
 const btnScrollTo = document
   .querySelector('.btn--scroll-to')
   .addEventListener('click', function (e) {
@@ -56,7 +55,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
   const target = e.target.getAttribute('href');
   if (e.target.classList.contains('nav__link')) {
-    console.log(target);
     document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
   }
 });
@@ -138,7 +136,7 @@ const sectionObserver = new IntersectionObserver(
 
 allSection.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 // lazy image loading
@@ -166,3 +164,41 @@ const imageObserve = new IntersectionObserver(
 );
 
 allLazyImage.forEach(img => imageObserve.observe(img));
+
+let currSlide = 0;
+
+// slider component
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+slider.style.transform = 'scale(0.8)';
+
+const changeSlide = function () {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${(i - currSlide) * 100}%)`;
+  });
+};
+
+changeSlide(0);
+
+btnRight.addEventListener('click', function () {
+  currSlide = currSlide == 3 ? 0 : currSlide + 1;
+  changeSlide();
+});
+
+btnLeft.addEventListener('click', function () {
+  currSlide = currSlide == 0 ? 3 : currSlide - 1;
+  changeSlide();
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key == 'ArrowLeft') {
+    currSlide = currSlide == 0 ? 3 : currSlide - 1;
+    changeSlide();
+  } else {
+    currSlide = currSlide == 3 ? 0 : currSlide + 1;
+    changeSlide();
+  }
+});
