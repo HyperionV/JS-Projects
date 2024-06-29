@@ -15,6 +15,14 @@ const tabBtn = operationElement.querySelectorAll('.btn');
 const nav = document.querySelector('.nav');
 
 const header = document.querySelector('.header');
+const section1 = document.querySelector('#section--1');
+
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
+
 /////////////////////////////////////////////////
 
 const openModal = function (e) {
@@ -40,7 +48,6 @@ document.addEventListener('keydown', function (e) {
 });
 
 // smooth scrolling
-const section1 = document.querySelector('#section--1');
 const btnScrollTo = document
   .querySelector('.btn--scroll-to')
   .addEventListener('click', function (e) {
@@ -89,6 +96,7 @@ tabBtn.forEach(e =>
   })
 );
 
+// menu fade animation
 const handleHover = function (e) {
   if (!e.target.classList.contains('nav__link')) return;
 
@@ -99,7 +107,6 @@ const handleHover = function (e) {
   e.target.style.opacity = 1;
 };
 
-// menu fade animation
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
@@ -136,7 +143,6 @@ const sectionObserver = new IntersectionObserver(
 
 allSection.forEach(function (section) {
   sectionObserver.observe(section);
-  // section.classList.add('section--hidden');
 });
 
 // lazy image loading
@@ -162,18 +168,10 @@ const imageObserve = new IntersectionObserver(
     rootMargin: '-200px',
   }
 );
-
 allLazyImage.forEach(img => imageObserve.observe(img));
 
-let currSlide = 0;
-
 // slider component
-const slides = document.querySelectorAll('.slide');
-const slider = document.querySelector('.slider');
-const btnLeft = document.querySelector('.slider__btn--left');
-const btnRight = document.querySelector('.slider__btn--right');
-const dotContainer = document.querySelector('.dots');
-
+let currSlide = 0;
 slider.style.transform = 'scale(0.8)';
 
 const createDots = function () {
