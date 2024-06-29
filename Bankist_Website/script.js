@@ -30,6 +30,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// smooth scrolling
 const section1 = document.querySelector('#section--1');
 console.log(section1.innerHTML);
 const btnScrollTo = document
@@ -40,6 +41,7 @@ const btnScrollTo = document
     section1.scrollIntoView({ behavior: 'smooth' });
   });
 
+// navigation bar
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -48,3 +50,36 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+// tabbed component
+let currentActiveOperation = 1;
+const operationElement = document.querySelector('.operations');
+const contentTab = operationElement.querySelectorAll('.operations__content');
+const tabBtn = operationElement.querySelectorAll('.btn');
+
+tabBtn.forEach(e =>
+  e.addEventListener('click', function (e) {
+    e.preventDefault();
+    const clicked = e.target.classList.contains('operations__tab')
+      ? e.target
+      : e.target.parentElement;
+
+    const target = Number(clicked.getAttribute('data-tab'));
+
+    if (target == currentActiveOperation) {
+      return;
+    }
+
+    clicked.classList.add('operations__tab--active');
+    tabBtn[currentActiveOperation - 1].classList.remove(
+      'operations__tab--active'
+    );
+
+    contentTab[currentActiveOperation - 1].classList.remove(
+      'operations__content--active'
+    );
+    contentTab[target - 1].classList.add('operations__content--active');
+
+    currentActiveOperation = target;
+  })
+);
