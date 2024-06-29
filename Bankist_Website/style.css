@@ -661,6 +661,10 @@ h4 {
   opacity: 0;
 }
 
+.blur {
+  opacity: 0.5;
+}
+
 /* COOKIE MESSAGE */
 .cookie-message {
   display: flex;
